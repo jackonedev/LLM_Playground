@@ -124,19 +124,18 @@ if request_confirmation:
     messages = []
 
     # Load previous conversation turns
-    if st.session_state.current_turn > 0 and memory:
-        for turn in range(st.session_state.current_turn):
-            if ("turn_" + str(turn) in st.session_state.chat_history) and (
-                st.session_state.chat_history["turn_" + str(turn)]
-            ):
+    if 1 < st.session_state.current_turn and memory:
+        latest_turns = list(st.session_state.chat_history.keys())[:-1]
+        for turn in latest_turns:
+            if st.session_state.chat_history[turn]["metadata"]["memory"]:
                 messages += [
                     HumanMessage(
-                        content=st.session_state.chat_history["turn_" + str(turn)][
+                        content=st.session_state.chat_history[turn][
                             "human"
                         ]
                     ),
                     AIMessage(
-                        content=st.session_state.chat_history["turn_" + str(turn)]["ai"]
+                        content=st.session_state.chat_history[turn]["ai"]
                     ),
                 ]
 
