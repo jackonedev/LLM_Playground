@@ -3,14 +3,17 @@ import os
 from datetime import datetime
 from itertools import count
 
+from dotenv import load_dotenv
 import streamlit as st
 from langchain_core.language_models.fake_chat_models import FakeChatModel
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_openai import ChatOpenAI
 
+load_dotenv()
 
 st.title("LLM playground")
+st.header("Freestyle Prompting")
 
 
 # SETTING INITIAL SESSION STATE
@@ -30,7 +33,7 @@ if "c" not in st.session_state:
 st.write("LLM Settings:")
 columns = st.columns(4)
 
-MODEL_OPTIONS = ("gpt-4", "gpt-4-mini", "o1-preview", "o1-mini", "develop-debugging")
+MODEL_OPTIONS = ("gpt-4o", "gpt-4o-mini", "o1-preview", "o1-mini", "develop-debugging")
 CHAIN_TYPES = ("Top Probability", "High Temperature")
 
 with columns[0]:
@@ -91,7 +94,7 @@ prompt_template = ChatPromptTemplate.from_messages(prompt_messages)
 if model_name != "develop-debugging":
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
-        st.error("Por favor, configura la clave de API de OpenAI (OPENAI_API_KEY).")
+        st.error("Please, configure the OpenAI API key (OPENAI_API_KEY).")
     else:
         # Handling edge cases
         if model_name in ["o1-preview", "o1-mini"]:
