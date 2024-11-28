@@ -50,7 +50,7 @@ if chain_type == "Top Probability":
             "top_p", min_value=0.1, max_value=1.0, value=0.2, step=0.1
         )
 
-elif chain_type == "Hot Temperature":
+elif chain_type == "High Temperature":
     with columns[2]:
         temperature = st.number_input(
             "temperature", min_value=0.8, max_value=2.0, value=1.0, step=0.1
