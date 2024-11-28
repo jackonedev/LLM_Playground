@@ -78,7 +78,6 @@ user_input = st.text_area(
     key="user_input",
 )
 
-
 # 3) Create the model instance
 # Prompt
 prompt_messages = [
@@ -112,9 +111,10 @@ else:
 
 def _submit_turn():
     "Updates the current Streamlit Session State"
+    st.session_state.user_request = st.session_state.user_input
+    # NOTE: actualizar ´c´ implica actualizar st.session_state.user_input
     st.session_state.current_turn = next(st.session_state.c)
     st.session_state.chat_history["turn_" + str(st.session_state.current_turn)] = {}
-    st.session_state.user_input = user_input
 
 
 request_confirmation = st.button("Submit", on_click=_submit_turn)
@@ -140,7 +140,7 @@ if request_confirmation:
                     ),
                 ]
 
-    messages += [HumanMessage(content=st.session_state.user_input)]
+    messages += [HumanMessage(content=st.session_state.user_request)]
 
     # Execute the model
     response = llm_chain.invoke({"messages": messages})
@@ -148,7 +148,7 @@ if request_confirmation:
 
     # Save the chat history
     st.session_state.chat_history["turn_" + str(st.session_state.current_turn)] = {
-        "human": st.session_state.user_input,
+        "human": st.session_state.user_request,
         "ai": st.session_state.output,
         "metadata": {
             "model_name": model_name,
@@ -192,5 +192,4 @@ if st.checkbox("Session Settings"):
         file_name="chat_history.json",
     )
 
-    if st.button("Reset Session"):
-        _reset()
+    st.button("Reset Session", on_click=_reset)
