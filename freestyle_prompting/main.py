@@ -61,7 +61,8 @@ elif chain_type == "High Temperature":
 
 
 with columns[3]:
-    memory = st.checkbox("Allow Memory")
+    memory = st.checkbox("Write Memory")
+    read_only = st.checkbox("Read Only Memory")
     system_message = st.checkbox("System Message")
 
 
@@ -154,8 +155,9 @@ if request_confirmation:
             "chain": chain_type,
             "temperature": temperature,
             "top_p": top_p,
-            "memory": memory,
+            "memory": memory if not read_only else False,
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "system": ""
         },
     }
     if system_message and model_name not in ["o1-preview", "o1-mini"]:
