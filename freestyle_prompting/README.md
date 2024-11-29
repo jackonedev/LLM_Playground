@@ -3,12 +3,13 @@
 Each user input passes directly to the model in all turns.
 
 **The interface provides the following settings**:
-- **model_names**: List of models available to respond to the user input
+- **model_name**: List of models available to respond to the user input
 - **chain_type**: pre-set configuration values
 - **temperature**: the temperature of the model
 - **top_p**: the probabilistic sum of tokens that should be considered for each subsequent token
-- **memory**: if the current turn will be saved in the chat history, default `False`
-- **system_message**: if the current turn will implement a system instruction message, default `False`
+- **write memory**: for reading and writing the current turn into the chat history.
+- **read only memory**: for reading only without saving the current turn into the chat history.
+- **system_message**: for implementing a system prompt message dynamically.
 
 
 **How the app manages the memory through the chat history**:
@@ -26,6 +27,6 @@ Each user input passes directly to the model in all turns.
 **Current available models**: gpt-4o, gpt-4o-mini, o1-preview, o1-mini, develop-debugging (FakeChatModel)
 
 
-**Interface Preview**:
+**Interface Preview** _(Outdated)_:
 
 ![interface-preview](preview.png)
