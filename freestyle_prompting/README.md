@@ -14,19 +14,21 @@ Each user input passes directly to the model in all turns.
 
 **How the app manages the memory through the chat history**:
 - The app saves all interactions
-- When "Allow memory" is `True`, the input prompt adjusts with all the previous turns in which the "Allow memory" was set to `True`
+- When "Write memory" is `True`, the input prompt adjusts with all the previous turns in which the "Write memory" was set to `True`
+- When "Read memory" is `True`, the input prompt adjusts with all the previous turns in which the "Write memory" was set to `True` but doesn't save the current turn
 - When the chat history is downloaded, all turns will appear with the corresponding metadata
 
 
 **The current app does not have**:
 - Dynamic chat interface
 - Pre-built prompts
-- Multi-turn configuration in a single step
 
 
-**Current available models**: gpt-4o, gpt-4o-mini, o1-preview, o1-mini, develop-debugging (FakeChatModel)
+**Current available models**: gpt-4o, gpt-4o-mini, o1-preview, o1-mini, develop-debugging
+
+- **develop-debugging**: This model would not execute any LLM, instead, it will allow you to enter the models output manually. This is for creating synthetic conversation for prompt design purposes.
 
 
-**Interface Preview** _(Outdated)_:
+**Interface Preview**:
 
 ![interface-preview](preview.png)
