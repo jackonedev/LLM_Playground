@@ -5,7 +5,6 @@ from itertools import count
 
 from dotenv import load_dotenv
 import streamlit as st
-from langchain_core.language_models.fake_chat_models import FakeChatModel
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_openai import ChatOpenAI
@@ -105,7 +104,9 @@ if model_name != "develop-debugging":
         )
 
 else:
-    llm_chain = prompt_template | FakeChatModel()
+    model_response = st.text_area(
+        "Model response:", placeholder="Enter the expected response here...", key="model_response"
+    )
 
 
 # 4) Send the request to the model
@@ -143,9 +144,12 @@ if request_confirmation:
     messages += [HumanMessage(content=st.session_state.user_request)]
 
     # Execute the model
-    response = llm_chain.invoke({"messages": messages})
-    st.session_state.output = response.content
-
+    if model_name != "develop-debugging":
+        response = llm_chain.invoke({"messages": messages})
+        st.session_state.output = response.content
+    else:
+        st.session_state.output = model_response
+    
     # Save the chat history
     st.session_state.chat_history["turn_" + str(st.session_state.current_turn)] = {
         "human": st.session_state.user_request,
