@@ -155,7 +155,7 @@ st.markdown(st.session_state.output)
 def _reset():
     if st.button("Confirm"):
         initial_state()
-        st.experimental_rerun()
+        st.rerun()
 
 if st.checkbox("Session Settings"):
     st.download_button(
