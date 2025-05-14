@@ -30,7 +30,7 @@ if "c" not in st.session_state:
 st.write("LLM Settings:")
 columns = st.columns(4)
 
-MODEL_OPTIONS = ("gpt-4o", "gpt-4o-mini", "o1", "o3-mini", "develop-debugging")
+MODEL_OPTIONS = ("gpt-4o", "gpt-4o-mini", "gpt-4.1", "o1", "o3-mini", "develop-debugging")
 CHAIN_TYPES = ("Top Probability", "High Temperature")
 
 with columns[0]:
@@ -80,7 +80,7 @@ if model_name != "develop-debugging":
         st.error("Please, configure the OpenAI API key (OPENAI_API_KEY).")
     else:
         # Handling reasoning models separately:
-        if model_name in ["o1", "o3-mini"]:
+        if model_name in ["o1", "o3-mini"]:#, "gpt-4.1"]:
             reasoning_effort = st.selectbox("Reasoning Effort", ("low", "medium", "high"))
             llm_chain = prompt_template | ChatOpenAI(
                 model=model_name,

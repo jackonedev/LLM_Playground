@@ -24,7 +24,7 @@ Each user input passes directly to the model in all turns.
 - Pre-built prompts
 
 
-**Current available models**: gpt-4o, gpt-4o-mini, o1-preview, o1-mini, develop-debugging
+**Current available models**: gpt-4o, gpt-4o-mini, gpt-4.1, o1, o3-mini, develop-debugging
 
 - **develop-debugging**: This model would not execute any LLM, instead, it will allow you to enter the models output manually. This is for creating synthetic conversation for prompt design purposes.
 
