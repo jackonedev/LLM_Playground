@@ -15,6 +15,7 @@ load_dotenv()
 st.title("LLM playground")
 st.header("Freestyle Prompting")
 
+
 # SETTING INITIAL SESSION STATE
 def initial_state():
     st.session_state.c = count()
