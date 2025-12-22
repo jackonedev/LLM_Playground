@@ -31,7 +31,8 @@ if "c" not in st.session_state:
 st.write("LLM Settings:")
 columns = st.columns(4)
 
-MODEL_OPTIONS = ("gpt-4o", "gpt-4o-mini", "gpt-4.1", "o1", "o3-mini", "develop-debugging")
+REASONING_MODELS = ("gpt-5-mini", "gpt-5-nano", "gpt-5.2", "gpt-5.1") # "gpt-5.1-codex-max": openai.NotFoundError: Error code: 404 - {'error': {'message': 'This is not a chat model and thus not supported in the v1/chat/completions endpoint. Did you mean to use v1/completions?', 'type': 'invalid_request_error', 'param': 'model', 'code': None}}
+MODEL_OPTIONS = ("gpt-4.1-mini", "gpt-4.1", "develop-debugging") + REASONING_MODELS
 CHAIN_TYPES = ("Top Probability", "High Temperature")
 
 with columns[0]:
@@ -51,7 +52,6 @@ with columns[2]:
 with columns[3]:
     memory = st.checkbox("Write Memory")
     read_only = st.checkbox("Read Only Memory")
-    # Now allow System Message for all models including o1 and o3-mini
     system_message_enabled = st.checkbox("System Message")
 
 # 2) Create the input boxes for user and system messages
@@ -81,8 +81,8 @@ if model_name != "develop-debugging":
         st.error("Please, configure the OpenAI API key (OPENAI_API_KEY).")
     else:
         # Handling reasoning models separately:
-        if model_name in ["o1", "o3-mini"]:#, "gpt-4.1"]:
-            reasoning_effort = st.selectbox("Reasoning Effort", ("low", "medium", "high"))
+        if model_name in REASONING_MODELS:
+            reasoning_effort = st.selectbox("Reasoning Effort", ("low", "medium", "high"))# "gpt-5.1-codex-max": "xhigh"
             llm_chain = prompt_template | ChatOpenAI(
                 model=model_name,
                 api_key=api_key,
