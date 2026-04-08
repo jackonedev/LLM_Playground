@@ -31,7 +31,7 @@ if "c" not in st.session_state:
 st.write("LLM Settings:")
 columns = st.columns(4)
 
-REASONING_MODELS = ("gpt-5-mini", "gpt-5-nano", "gpt-5.2", "gpt-5.1") # "gpt-5.1-codex-max": openai.NotFoundError: Error code: 404 - {'error': {'message': 'This is not a chat model and thus not supported in the v1/chat/completions endpoint. Did you mean to use v1/completions?', 'type': 'invalid_request_error', 'param': 'model', 'code': None}}
+REASONING_MODELS = ("gpt-5.4-mini", "gpt-5.4-nano", "gpt-5.4")
 MODEL_OPTIONS = ("gpt-4.1-mini", "gpt-4.1", "develop-debugging") + REASONING_MODELS
 CHAIN_TYPES = ("Top Probability", "High Temperature")
 
