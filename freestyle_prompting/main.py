@@ -31,7 +31,8 @@ if "c" not in st.session_state:
 st.write("LLM Settings:")
 columns = st.columns(4)
 
-REASONING_MODELS = ("gpt-5.4-mini", "gpt-5.4-nano", "gpt-5.4")
+REASONING_MODELS = ("gpt-5.4-mini", "gpt-5.4", "gpt-5.5")
+REASONING_EFFORT_OPTIONS = ("low", "medium", "high", "xhigh")
 MODEL_OPTIONS = ("gpt-4.1-mini", "gpt-4.1", "develop-debugging") + REASONING_MODELS
 CHAIN_TYPES = ("Top Probability", "High Temperature")
 
@@ -82,7 +83,7 @@ if model_name != "develop-debugging":
     else:
         # Handling reasoning models separately:
         if model_name in REASONING_MODELS:
-            reasoning_effort = st.selectbox("Reasoning Effort", ("low", "medium", "high"))# "gpt-5.1-codex-max": "xhigh"
+            reasoning_effort = st.selectbox("Reasoning Effort", REASONING_EFFORT_OPTIONS)
             llm_chain = prompt_template | ChatOpenAI(
                 model=model_name,
                 api_key=api_key,
